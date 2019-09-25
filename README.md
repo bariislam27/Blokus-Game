@@ -2,4 +2,4 @@
 
 * Group Memebers
 
-ALbari Islam, Meng Wang, Mohammed Madan
+Albari Islam, Meng Wang, Mohammed Madan
