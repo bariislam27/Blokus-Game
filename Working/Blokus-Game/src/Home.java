@@ -24,16 +24,17 @@ public class Home
 
 class MainMenu extends JFrame implements ActionListener
 {
+	private String humanPlayer[] = {null, "1", "2", "3", "4"};
+	private String CPUplayer[] = {null, "3", "2", "1", "0"};
 	private String[] themes = {"Theme 1", "Theme 2", "Theme 3"};
 	
 	private JPanel panelTop_Home, panelBottomMain_Home, panelNewGame_Home, panelSettings_Home, panelCpuPlayers_Home;
-	private JLabel lblTitle_Home, lblChoosePlayers_NewGame, lblSettings, lblChooseCpuPlayers, lblDifficulty;
-	private JButton btnNewGame_Home, btnResume_Home, btnSettings_Home, btn1Player_NewGame, 
-		btn2Players_NewGame, btn3Players_NewGame, btn4Players_NewGame, btnGoBack_NewGame, 
-		btnGoBack_Settings, btnGoBack_CpuPlayers, btnStartGame_CpuPlayers;
+	private JLabel lblTitle_Home, lblSettings, lblChoosePlayers, lblDifficulty, lblHumanPlayer, lblCPUplayer;
+	private JButton btnNewGame_Home, btnResume_Home, btnSettings_Home, btnGoBack_NewGame, 
+		btnGoBack_Settings, btnStartGame_ChoosePlayers;
 	private JCheckBox chckbxHints, chckbxCpuPlayer1, chckbxCpuPlayer2, chckbxCpuPlayer3, 
 		chckbxEasy, chckbxMedium, chckbxHard;
-	private JComboBox comboBoxTheme;
+	private JComboBox comboBoxTheme, comboBoxPlayer, comboBoxCPUplayer;
 	private ButtonGroup cpuPlayerGrp, difficlutyGrp;
 	
 	public MainMenu() 
@@ -54,6 +55,7 @@ class MainMenu extends JFrame implements ActionListener
 		lblTitle_Home.setFont(new Font("Manjari Bold", Font.BOLD, 60));
 		lblTitle_Home.setBounds(251, 27, 210, 70);
 		panelTop_Home.add(lblTitle_Home);
+		
 		
 		//.......... Bottom Panels ..........		
 		panelBottomMain_Home = new JPanel();
@@ -102,43 +104,89 @@ class MainMenu extends JFrame implements ActionListener
 		btnSettings_Home.setBounds(240, 183, 220, 45);
 		btnSettings_Home.addActionListener(this);
 		panelBottomMain_Home.add(btnSettings_Home);
-		//.......... Main Menu ..........				
+		//.......... Main Menu ..........
 		
 		
-		//.......... New Game ..........		
-		lblChoosePlayers_NewGame = new JLabel("Choose Player(s)");
-		lblChoosePlayers_NewGame.setFont(new Font("Dyuthi", Font.BOLD, 30));
-		lblChoosePlayers_NewGame.setBounds(245, 20, 250, 35);
-		panelNewGame_Home.add(lblChoosePlayers_NewGame);
+		//.......... Choose Player(s) [New Game button] ..........
+		lblChoosePlayers = new JLabel("Choose Player(s)");
+		lblChoosePlayers.setFont(new Font("Dyuthi", Font.BOLD, 25));
+		lblChoosePlayers.setBounds(250, 15, 250, 35);
+		panelNewGame_Home.add(lblChoosePlayers);
 		
-		btn1Player_NewGame = new JButton("Single Player");
-		btn1Player_NewGame.setBackground(new Color(0, 250, 154));
-		btn1Player_NewGame.setFont(new Font("Dyuthi", Font.PLAIN, 23));
-		btn1Player_NewGame.setBounds(100, 75, 200, 35);
-		btn1Player_NewGame.addActionListener(this);
-		panelNewGame_Home.add(btn1Player_NewGame);
+		lblDifficulty = new JLabel("Difficulty"); 
+		lblDifficulty.setFont(new Font("Dyuthi", Font.BOLD, 25));
+		lblDifficulty.setBounds(290, 108, 120, 35);
+		panelNewGame_Home.add(lblDifficulty);
 		
-		btn2Players_NewGame = new JButton("2 Players");
-		btn2Players_NewGame.setBackground(new Color(100, 149, 237));
-		btn2Players_NewGame.setFont(new Font("Dyuthi", Font.PLAIN, 23));
-		btn2Players_NewGame.setBounds(400, 75, 200, 35);
-		btn2Players_NewGame.addActionListener(this);
-		panelNewGame_Home.add(btn2Players_NewGame);
+		lblHumanPlayer = new JLabel("Human"); 
+		lblHumanPlayer.setFont(new Font("Dyuthi", Font.BOLD, 25));
+		lblHumanPlayer.setBounds(68, 55, 115, 35);
+		panelNewGame_Home.add(lblHumanPlayer);
 		
-		btn3Players_NewGame = new JButton("3 Players");
-		btn3Players_NewGame.setBackground(new Color(30, 144, 255));
-		btn3Players_NewGame.setFont(new Font("Dyuthi", Font.PLAIN, 23));
-		btn3Players_NewGame.setBounds(100, 145, 200, 35);
-		btn3Players_NewGame.addActionListener(this);
-		panelNewGame_Home.add(btn3Players_NewGame);
+		lblCPUplayer = new JLabel("CPU"); 
+		lblCPUplayer.setFont(new Font("Dyuthi", Font.BOLD, 25));
+		lblCPUplayer.setBounds(394, 55, 115, 35);
+		panelNewGame_Home.add(lblCPUplayer);
 		
-		btn4Players_NewGame = new JButton("4 Players");
-		btn4Players_NewGame.setBackground(new Color(144, 238, 144));
-		btn4Players_NewGame.setFont(new Font("Dyuthi", Font.PLAIN, 23));
-		btn4Players_NewGame.setBounds(400, 145, 200, 35);
-		btn4Players_NewGame.addActionListener(this);
-		panelNewGame_Home.add(btn4Players_NewGame);
-		//.......... New Game ..........
+		comboBoxPlayer = new JComboBox(humanPlayer);
+		comboBoxPlayer.setBackground(Color.LIGHT_GRAY);
+		comboBoxPlayer.setFont(new Font("Dyuthi", Font.PLAIN, 20));
+		comboBoxPlayer.setBounds(211, 55, 115, 35);
+		comboBoxPlayer.addActionListener(this);
+		panelNewGame_Home.add(comboBoxPlayer);
+		
+		comboBoxCPUplayer = new JComboBox(CPUplayer);
+		comboBoxCPUplayer.setBackground(Color.LIGHT_GRAY);
+		comboBoxCPUplayer.setFont(new Font("Dyuthi", Font.PLAIN, 20));
+		comboBoxCPUplayer.setBounds(537, 55, 115, 35);
+		comboBoxCPUplayer.addActionListener(this);
+		panelNewGame_Home.add(comboBoxCPUplayer);
+		
+		/*chckbxCpuPlayer1 = new JCheckBox("1");
+		chckbxCpuPlayer1.setBackground(Color.LIGHT_GRAY);
+		chckbxCpuPlayer1.setFont(new Font("Dyuthi", Font.PLAIN, 20));
+		chckbxCpuPlayer1.setBounds(88, 55, 115, 35);
+		chckbxCpuPlayer1.addActionListener(this);
+		panelNewGame_Home.add(chckbxCpuPlayer1);*/
+		
+		chckbxEasy = new JCheckBox("Easy");
+		chckbxEasy.setBackground(Color.GREEN);
+		chckbxEasy.setFont(new Font("Dyuthi", Font.PLAIN, 20));
+		chckbxEasy.setBounds(88, 150, 115, 35);
+		chckbxEasy.addActionListener(this);
+		panelNewGame_Home.add(chckbxEasy);
+		
+	    chckbxMedium = new JCheckBox("Medium");
+		chckbxMedium.setBackground(Color.ORANGE);
+		chckbxMedium.setFont(new Font("Dyuthi", Font.PLAIN, 20));
+		chckbxMedium.setBounds(291, 150, 115, 35);
+		chckbxMedium.addActionListener(this);
+		panelNewGame_Home.add(chckbxMedium);
+		
+		chckbxHard = new JCheckBox("Hard");
+		chckbxHard.setBackground(Color.RED);
+		chckbxHard.setFont(new Font("Dyuthi", Font.PLAIN, 20));
+		chckbxHard.setBounds(494, 150, 115, 35);
+		chckbxHard.addActionListener(this);
+		panelNewGame_Home.add(chckbxHard);
+		
+		btnStartGame_ChoosePlayers = new JButton("Start Game");
+		btnStartGame_ChoosePlayers.setBackground(Color.GREEN);
+		btnStartGame_ChoosePlayers.setFont(new Font("Dyuthi", Font.PLAIN, 23));
+		btnStartGame_ChoosePlayers.setBounds(525, 210, 150, 35);
+		btnStartGame_ChoosePlayers.addActionListener(this);
+		panelNewGame_Home.add(btnStartGame_ChoosePlayers);
+		
+		cpuPlayerGrp = new ButtonGroup();
+		cpuPlayerGrp.add(chckbxCpuPlayer1);
+		cpuPlayerGrp.add(chckbxCpuPlayer2);
+		cpuPlayerGrp.add(chckbxCpuPlayer3);
+		
+		difficlutyGrp = new ButtonGroup();
+		difficlutyGrp.add(chckbxEasy);
+		difficlutyGrp.add(chckbxMedium);
+		difficlutyGrp.add(chckbxHard);
+		//.......... Choose Player(s) [New Game button] ..........
 		
 		
 		//.......... Settings ..........	
@@ -162,78 +210,6 @@ class MainMenu extends JFrame implements ActionListener
 		//.......... Settings ..........
 		
 		
-		//.......... CPU Players ..........
-		lblChooseCpuPlayers = new JLabel("Choose CPU Player(s)");
-		lblChooseCpuPlayers.setFont(new Font("Dyuthi", Font.BOLD, 25));
-		lblChooseCpuPlayers.setBounds(225, 15, 250, 35);
-		panelCpuPlayers_Home.add(lblChooseCpuPlayers);
-		
-		lblDifficulty = new JLabel("Difficulty"); 
-		lblDifficulty.setFont(new Font("Dyuthi", Font.BOLD, 25));
-		lblDifficulty.setBounds(290, 108, 120, 35);
-		panelCpuPlayers_Home.add(lblDifficulty);
-		
-		chckbxCpuPlayer1 = new JCheckBox("1");
-		chckbxCpuPlayer1.setBackground(Color.LIGHT_GRAY);
-		chckbxCpuPlayer1.setFont(new Font("Dyuthi", Font.PLAIN, 20));
-		chckbxCpuPlayer1.setBounds(88, 55, 115, 35);
-		chckbxCpuPlayer1.addActionListener(this);
-		panelCpuPlayers_Home.add(chckbxCpuPlayer1);
-		
-		chckbxCpuPlayer2 = new JCheckBox("2");
-		chckbxCpuPlayer2.setBackground(Color.LIGHT_GRAY);
-		chckbxCpuPlayer2.setFont(new Font("Dyuthi", Font.PLAIN, 20));
-		chckbxCpuPlayer2.setBounds(291, 55, 115, 35);
-		chckbxCpuPlayer2.addActionListener(this);
-		panelCpuPlayers_Home.add(chckbxCpuPlayer2);
-		
-		chckbxCpuPlayer3 = new JCheckBox("3");
-		chckbxCpuPlayer3.setBackground(Color.LIGHT_GRAY);
-		chckbxCpuPlayer3.setFont(new Font("Dyuthi", Font.PLAIN, 20));
-		chckbxCpuPlayer3.setBounds(494, 55, 115, 35);
-		chckbxCpuPlayer3.addActionListener(this);
-		panelCpuPlayers_Home.add(chckbxCpuPlayer3);
-		
-		chckbxEasy = new JCheckBox("Easy");
-		chckbxEasy.setBackground(Color.GREEN);
-		chckbxEasy.setFont(new Font("Dyuthi", Font.PLAIN, 20));
-		chckbxEasy.setBounds(88, 150, 115, 35);
-		chckbxEasy.addActionListener(this);
-		panelCpuPlayers_Home.add(chckbxEasy);
-		
-	    chckbxMedium = new JCheckBox("Medium");
-		chckbxMedium.setBackground(Color.ORANGE);
-		chckbxMedium.setFont(new Font("Dyuthi", Font.PLAIN, 20));
-		chckbxMedium.setBounds(291, 150, 115, 35);
-		chckbxMedium.addActionListener(this);
-		panelCpuPlayers_Home.add(chckbxMedium);
-		
-		chckbxHard = new JCheckBox("Hard");
-		chckbxHard.setBackground(Color.RED);
-		chckbxHard.setFont(new Font("Dyuthi", Font.PLAIN, 20));
-		chckbxHard.setBounds(494, 150, 115, 35);
-		chckbxHard.addActionListener(this);
-		panelCpuPlayers_Home.add(chckbxHard);
-		
-		btnStartGame_CpuPlayers = new JButton("Start Game");
-		btnStartGame_CpuPlayers.setBackground(Color.GREEN);
-		btnStartGame_CpuPlayers.setFont(new Font("Dyuthi", Font.PLAIN, 23));
-		btnStartGame_CpuPlayers.setBounds(525, 210, 150, 35);
-		btnStartGame_CpuPlayers.addActionListener(this);
-		panelCpuPlayers_Home.add(btnStartGame_CpuPlayers);
-		
-		cpuPlayerGrp = new ButtonGroup();
-		cpuPlayerGrp.add(chckbxCpuPlayer1);
-		cpuPlayerGrp.add(chckbxCpuPlayer2);
-		cpuPlayerGrp.add(chckbxCpuPlayer3);
-		
-		difficlutyGrp = new ButtonGroup();
-		difficlutyGrp.add(chckbxEasy);
-		difficlutyGrp.add(chckbxMedium);
-		difficlutyGrp.add(chckbxHard);
-		//.......... CPU Players ..........
-		
-		
 		//.......... Go Back buttons ..........
 		btnGoBack_NewGame = new JButton("Go Back");
 		btnGoBack_NewGame.setBackground(Color.YELLOW);
@@ -248,59 +224,40 @@ class MainMenu extends JFrame implements ActionListener
 		btnGoBack_Settings.setBounds(25, 210, 115, 35);
 		btnGoBack_Settings.addActionListener(this);
 		panelSettings_Home.add(btnGoBack_Settings);
-		
-		btnGoBack_CpuPlayers = new JButton("Go Back");
-		btnGoBack_CpuPlayers.setBackground(Color.YELLOW);
-		btnGoBack_CpuPlayers.setFont(new Font("Dyuthi", Font.PLAIN, 23));
-		btnGoBack_CpuPlayers.setBounds(25, 210, 115, 35);
-		btnGoBack_CpuPlayers.addActionListener(this);
-		panelCpuPlayers_Home.add(btnGoBack_CpuPlayers);
 		//.......... Go Back buttons ..........
 
 		
 		panelNewGame_Home.setVisible(false);
 		panelSettings_Home.setVisible(false);
-		panelCpuPlayers_Home.setVisible(false);
 		panelBottomMain_Home.setVisible(true);
 		setVisible(true);
 	}
+	
+	
 	
 	public void actionPerformed(ActionEvent e) 
     {
         if (e.getSource().equals(btnNewGame_Home)) 
         {
-        	panelBottomMain_Home.setVisible(false);
-        	panelSettings_Home.setVisible(false);
-        	panelCpuPlayers_Home.setVisible(false);
         	panelNewGame_Home.setVisible(true);
+        	panelSettings_Home.setVisible(false);
+        	panelBottomMain_Home.setVisible(false);
         }
         else if (e.getSource().equals(btnSettings_Home)) 
         {
-        	panelBottomMain_Home.setVisible(false);
-        	panelNewGame_Home.setVisible(false);
-        	panelCpuPlayers_Home.setVisible(false);
         	panelSettings_Home.setVisible(true);
-		}
-        else if (e.getSource().equals(btn1Player_NewGame) || e.getSource().equals(btn2Players_NewGame) 
-        		|| e.getSource().equals(btn3Players_NewGame) || e.getSource().equals(btn4Players_NewGame)) 
-        {
-        	panelNewGame_Home.setVisible(false);
-        	panelSettings_Home.setVisible(false);
         	panelBottomMain_Home.setVisible(false);
-        	panelCpuPlayers_Home.setVisible(true);
+        	panelNewGame_Home.setVisible(false);      	
 		}
-        else if (e.getSource().equals(btnGoBack_NewGame) || e.getSource().equals(btnGoBack_Settings)
-        		|| e.getSource().equals(btnGoBack_CpuPlayers)) 
+        else if (e.getSource().equals(btnGoBack_NewGame) || e.getSource().equals(btnGoBack_Settings)) 
         {
         	panelNewGame_Home.setVisible(false);
         	panelSettings_Home.setVisible(false);
-        	panelCpuPlayers_Home.setVisible(false);
         	panelBottomMain_Home.setVisible(true);
 		}
-        else if (e.getSource().equals(btnStartGame_CpuPlayers)) 
+        else if (e.getSource().equals(btnStartGame_ChoosePlayers)) 
         {
-        	if ((chckbxCpuPlayer1.isSelected() || chckbxCpuPlayer2.isSelected() || chckbxCpuPlayer3.isSelected())
-        			&& (chckbxEasy.isSelected() || chckbxMedium.isSelected() || chckbxHard.isSelected())) 
+        	if (chckbxEasy.isSelected() || chckbxMedium.isSelected() || chckbxHard.isSelected())
         	{
         		setVisible(false);
             	GameGrid gridWindow = new GameGrid();
