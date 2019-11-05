@@ -27,11 +27,11 @@ class MainMenu extends JFrame implements ActionListener
 	private String humanPlayer[] = {"1", "2", "3", "4"};
 	private String CPUplayer[] = {"3", "2", "1", "0"};
 	private String[] themes = {"Default", "Fire", "Ice"};
-	private String durationString;
 	public Color plOneColor = new Color(30, 144, 255), plTwoColor = new Color(0, 255, 0), plThreeColor = new Color(255, 255, 0), plFourColor = new Color(169, 169, 169), backgroundColor = new Color(255, 255, 255), GameboardColor;
 	
 	private JPanel panelTop_Home, panelBottomMain_Home, panelNewGame_Home, panelSettings_Home, panelCpuPlayers_Home;
-	private JLabel lblTitle_Home, lblSettings, lblChoosePlayers, lblDifficulty, lblDuration, lblHumanPlayer, lblCPUplayer;
+	private JLabel lblTitle_Home, lblSettings, lblChoosePlayers, lblDifficulty, lblDurationE, lblDurationM, 
+		lblDurationH, lblHumanPlayer, lblCPUplayer;
 	private JButton btnNewGame_Home, btnResume_Home, btnSettings_Home, btnGoBack_NewGame, 
 		btnGoBack_Settings, btnStartGame_ChoosePlayers;
 	private JCheckBox chckbxHints, chckbxCpuPlayer1, chckbxCpuPlayer2, chckbxCpuPlayer3, 
@@ -121,43 +121,52 @@ class MainMenu extends JFrame implements ActionListener
 		
 		lblDifficulty = new JLabel("Difficulty"); 
 		lblDifficulty.setFont(new Font("courier", Font.BOLD, 20));
-		lblDifficulty.setBounds(290, 108, 120, 35);
+		lblDifficulty.setBounds(290, 100, 120, 35);
 		panelNewGame_Home.add(lblDifficulty);
 		
 		lblHumanPlayer = new JLabel("Human"); 
 		lblHumanPlayer.setFont(new Font("courier", Font.BOLD, 20));
-		lblHumanPlayer.setBounds(68, 55, 115, 35);
+		lblHumanPlayer.setBounds(100, 55, 115, 35);
 		panelNewGame_Home.add(lblHumanPlayer);
 		
 		lblCPUplayer = new JLabel("CPU"); 
 		lblCPUplayer.setFont(new Font("courier", Font.BOLD, 20));
-		lblCPUplayer.setBounds(394, 55, 115, 35);
+		lblCPUplayer.setBounds(410, 55, 115, 35);
 		panelNewGame_Home.add(lblCPUplayer);
 		
-		durationString = " No time limit             30 Sec/Turn              15 Sec/Turn";
-		lblDuration = new JLabel(durationString); 
-		lblDuration.setFont(new Font("courier", Font.PLAIN, 13));
-		lblDuration.setBounds(88, 185, 550, 20);
-		panelNewGame_Home.add(lblDuration);
+		lblDurationE = new JLabel("No time limit"); 
+		lblDurationE.setFont(new Font("courier", Font.PLAIN, 13));
+		lblDurationE.setBounds(95, 175, 150, 20);
+		panelNewGame_Home.add(lblDurationE);
+		
+		lblDurationM = new JLabel("30 Sec/Turn"); 
+		lblDurationM.setFont(new Font("courier", Font.PLAIN, 13));
+		lblDurationM.setBounds(300, 175, 150, 20);
+		panelNewGame_Home.add(lblDurationM);
+		
+		lblDurationH = new JLabel("15 Sec/Turn"); 
+		lblDurationH.setFont(new Font("courier", Font.PLAIN, 13));
+		lblDurationH.setBounds(505, 175, 150, 20);
+		panelNewGame_Home.add(lblDurationH);
 		
 		comboBoxPlayer = new JComboBox(humanPlayer);
 		comboBoxPlayer.setBackground(Color.LIGHT_GRAY);
 		comboBoxPlayer.setFont(new Font("courier", Font.PLAIN, 20));
-		comboBoxPlayer.setBounds(211, 55, 115, 35);
+		comboBoxPlayer.setBounds(200, 55, 115, 35);
 		comboBoxPlayer.addActionListener(this);
 		panelNewGame_Home.add(comboBoxPlayer);
 		
 		comboBoxCPUplayer = new JComboBox(CPUplayer);
 		comboBoxCPUplayer.setBackground(Color.LIGHT_GRAY);
 		comboBoxCPUplayer.setFont(new Font("courier", Font.PLAIN, 20));
-		comboBoxCPUplayer.setBounds(537, 55, 115, 35);
+		comboBoxCPUplayer.setBounds(480, 55, 115, 35);
 		comboBoxCPUplayer.addActionListener(this);
 		panelNewGame_Home.add(comboBoxCPUplayer);
 		
 		chckbxEasy = new JCheckBox("Easy");
 		chckbxEasy.setBackground(Color.GREEN);
 		chckbxEasy.setFont(new Font("courier", Font.PLAIN, 20));
-		chckbxEasy.setBounds(88, 150, 115, 35);
+		chckbxEasy.setBounds(88, 140, 115, 35);
 		chckbxEasy.setSelected(true);
 		chckbxEasy.addActionListener(this);
 		panelNewGame_Home.add(chckbxEasy);
@@ -165,14 +174,14 @@ class MainMenu extends JFrame implements ActionListener
 	    chckbxMedium = new JCheckBox("Medium");
 		chckbxMedium.setBackground(Color.ORANGE);
 		chckbxMedium.setFont(new Font("courier", Font.PLAIN, 20));
-		chckbxMedium.setBounds(291, 150, 115, 35);
+		chckbxMedium.setBounds(291, 140, 115, 35);
 		chckbxMedium.addActionListener(this);
 		panelNewGame_Home.add(chckbxMedium);
 		
 		chckbxHard = new JCheckBox("Hard");
 		chckbxHard.setBackground(Color.RED);
 		chckbxHard.setFont(new Font("courier", Font.PLAIN, 20));
-		chckbxHard.setBounds(494, 150, 115, 35);
+		chckbxHard.setBounds(494, 140, 115, 35);
 		chckbxHard.addActionListener(this);
 		panelNewGame_Home.add(chckbxHard);
 		
