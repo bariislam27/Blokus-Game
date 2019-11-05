@@ -3,16 +3,17 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.Color;
 import javax.swing.JLabel;
-import java.awt.Font;
 
 public class Game extends JFrame
 {
 	private JPanel leftPanel_Game, centerPanel_Game, rightPanel_Game;
 	private JLabel lblScores, lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4,
 		lblPlayer1Score, lblPlayer2Score, lblPlayer3Score, lblPlayer4Score;
-	
+	private JButton btnBoard[][];
+
+	private int row = 20;
+	private int col = 20;
 	
 	
 	public Game()
@@ -35,7 +36,7 @@ public class Game extends JFrame
 		centerPanel_Game.setBackground(Color.BLUE);
 		centerPanel_Game.setBounds(155, 0, 500, 500);
 		getContentPane().add(centerPanel_Game);
-		centerPanel_Game.setLayout(null);	
+		centerPanel_Game.setLayout(new GridLayout(row, col));	
 		
 		rightPanel_Game = new JPanel();
 		rightPanel_Game.setBackground(Color.LIGHT_GRAY);
@@ -91,8 +92,15 @@ public class Game extends JFrame
 
 		
 		//.......... Center Panel ..........
-		GridsCanvas xyz = new GridsCanvas(500, 500, 25, 25);
-		centerPanel_Game.add(xyz);
+
+		btnBoard = new JButton[row][col];
+        for (int i = 0; i < row; i++) {
+        	for (int j = 0; j < col; j++) {
+                btnBoard[i][j] = new JButton();
+            centerPanel_Game.add(btnBoard[i][j]);
+            btnBoard[i][j].setBackground(Color.white);
+	        }
+	    }
 		//.......... Center Panel ..........
         
         
@@ -105,7 +113,7 @@ public class Game extends JFrame
 		//.......... Right Panel ..........
 		
 		
-		
+		setResizable(false);
 		setVisible(true);
 	}
 	

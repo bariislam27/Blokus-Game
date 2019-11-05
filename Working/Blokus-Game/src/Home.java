@@ -226,6 +226,7 @@ class MainMenu extends JFrame implements ActionListener
 		panelNewGame_Home.setVisible(false);
 		panelSettings_Home.setVisible(false);
 		panelBottomMain_Home.setVisible(true);
+		setResizable(false);
 		setVisible(true);
 	}
 	//......updates the colors on the main windows
