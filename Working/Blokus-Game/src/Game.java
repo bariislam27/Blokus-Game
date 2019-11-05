@@ -1,9 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 
 public class Game extends JFrame implements ActionListener
 {
@@ -44,7 +41,7 @@ public class Game extends JFrame implements ActionListener
 		rightPanel_Game.setBackground(Color.LIGHT_GRAY);
 		rightPanel_Game.setBounds(655, 0, 170, 500);
 		getContentPane().add(rightPanel_Game);
-		rightPanel_Game.setLayout(null);
+		rightPanel_Game.setLayout(new GridLayout(5, 1));
 		//.......... Panels ..........
 		
 		
@@ -108,14 +105,26 @@ public class Game extends JFrame implements ActionListener
         
 		
 		//.......... Right Panel ..........	
-        scrollPane = new JScrollPane();
-        //(width, location,, height)
-        scrollPane.setBounds(125,0,160,100);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        rightPanel_Game.add(scrollPane);
+        JButton test = new JButton("a");
+        JButton test2 = new JButton("a");
+        test.setSize(165, 165);
+        test2.setSize(165, 165);
+//        //test = new JButton[row][col];
+//        for (int i = 1; i < 21; i++) {
+//        	//test[i].setSize(168,168);
+//        	rightPanel_Game.add(test[i]);
+//		}
+        rightPanel_Game.add(test);
+        rightPanel_Game.add(test2);
+        
+//        scrollPane = new JScrollPane();
+//        //(width, location,, height)
+//        scrollPane.setBounds(125,0,160,100);
+//        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//        rightPanel_Game.add(scrollPane);
 
         
-        
+      
 		//.......... Right Panel ..........
 		
 		
@@ -125,7 +134,6 @@ public class Game extends JFrame implements ActionListener
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		Object ob = e.getSource();
-		System.out.println("" + ob);
+		//
 	}
 }
