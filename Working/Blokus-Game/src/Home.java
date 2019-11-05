@@ -27,10 +27,11 @@ class MainMenu extends JFrame implements ActionListener
 	private String humanPlayer[] = {"1", "2", "3", "4"};
 	private String CPUplayer[] = {"3", "2", "1", "0"};
 	private String[] themes = {"Default", "Fire", "Ice"};
+	private String durationString;
 	public Color plOneColor = new Color(30, 144, 255), plTwoColor = new Color(0, 255, 0), plThreeColor = new Color(255, 255, 0), plFourColor = new Color(169, 169, 169), backgroundColor = new Color(255, 255, 255), GameboardColor;
 	
 	private JPanel panelTop_Home, panelBottomMain_Home, panelNewGame_Home, panelSettings_Home, panelCpuPlayers_Home;
-	private JLabel lblTitle_Home, lblSettings, lblChoosePlayers, lblDifficulty, lblHumanPlayer, lblCPUplayer;
+	private JLabel lblTitle_Home, lblSettings, lblChoosePlayers, lblDifficulty, lblDuration, lblHumanPlayer, lblCPUplayer;
 	private JButton btnNewGame_Home, btnResume_Home, btnSettings_Home, btnGoBack_NewGame, 
 		btnGoBack_Settings, btnStartGame_ChoosePlayers;
 	private JCheckBox chckbxHints, chckbxCpuPlayer1, chckbxCpuPlayer2, chckbxCpuPlayer3, 
@@ -39,8 +40,6 @@ class MainMenu extends JFrame implements ActionListener
 	private ButtonGroup difficlutyGrp;
 	
 	private int intHuman, intCPU;
-	
-	
 	
 	
 	public MainMenu() 
@@ -135,6 +134,12 @@ class MainMenu extends JFrame implements ActionListener
 		lblCPUplayer.setBounds(394, 55, 115, 35);
 		panelNewGame_Home.add(lblCPUplayer);
 		
+		durationString = " No time limit             30 Sec/Turn              15 Sec/Turn";
+		lblDuration = new JLabel(durationString); 
+		lblDuration.setFont(new Font("courier", Font.PLAIN, 13));
+		lblDuration.setBounds(88, 185, 550, 20);
+		panelNewGame_Home.add(lblDuration);
+		
 		comboBoxPlayer = new JComboBox(humanPlayer);
 		comboBoxPlayer.setBackground(Color.LIGHT_GRAY);
 		comboBoxPlayer.setFont(new Font("courier", Font.PLAIN, 20));
@@ -153,6 +158,7 @@ class MainMenu extends JFrame implements ActionListener
 		chckbxEasy.setBackground(Color.GREEN);
 		chckbxEasy.setFont(new Font("courier", Font.PLAIN, 20));
 		chckbxEasy.setBounds(88, 150, 115, 35);
+		chckbxEasy.setSelected(true);
 		chckbxEasy.addActionListener(this);
 		panelNewGame_Home.add(chckbxEasy);
 		
@@ -187,7 +193,7 @@ class MainMenu extends JFrame implements ActionListener
 		//.......... Settings ..........	
 		lblSettings = new JLabel("Settings");
 		lblSettings.setFont(new Font("courier", Font.BOLD, 30));
-		lblSettings.setBounds(290, 30, 120, 35);
+		lblSettings.setBounds(285, 30, 150, 35);
 		panelSettings_Home.add(lblSettings);
 		
 		chckbxHints = new JCheckBox("    Hints");
