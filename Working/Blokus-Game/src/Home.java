@@ -45,7 +45,8 @@ class MainMenu extends JFrame implements ActionListener
 	public MainMenu() 
 	{
 		setTitle("Blokus");
-		setBounds(300, 150, 700, 400);
+		setSize(700, 400);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
@@ -244,16 +245,17 @@ class MainMenu extends JFrame implements ActionListener
 		setResizable(false);
 		setVisible(true);
 	}
+	
+	
 	//......updates the colors on the main windows
 	public void updateColors()
 	{
 		panelTop_Home.setBackground(plOneColor);
 		btnNewGame_Home.setBackground(plTwoColor);
 		btnResume_Home.setBackground(plThreeColor);
-		btnSettings_Home.setBackground(plFourColor);
-
-		
+		btnSettings_Home.setBackground(plFourColor);	
 	}
+	
 	
 	public void actionPerformed(ActionEvent e) 
     {

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-public class Game extends JFrame
+public class Game extends JFrame implements ActionListener
 {
 	private JPanel leftPanel_Game, centerPanel_Game, rightPanel_Game;
 	private JLabel lblScores, lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4,
@@ -20,7 +20,8 @@ public class Game extends JFrame
 	public Game()
 	{
 		setTitle("Blokus");
-		setBounds(300, 150, 800, 500);
+		setSize(800, 529);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
@@ -93,19 +94,16 @@ public class Game extends JFrame
 
 		
 		//.......... Center Panel ..........
-
 		btnBoard = new JButton[row][col];
         for (int i = 0; i < row; i++) {
         	for (int j = 0; j < col; j++) {
                 btnBoard[i][j] = new JButton();
+                btnBoard[i][j].addActionListener(this);
             centerPanel_Game.add(btnBoard[i][j]);
             btnBoard[i][j].setBackground(Color.white);
 	        }
 	    }
-		//.......... Center Panel ..........
-        
-        
-        
+		//.......... Center Panel .......... 
         
         
 		
@@ -123,7 +121,11 @@ public class Game extends JFrame
 		
 		setResizable(false);
 		setVisible(true);
-	}
+	}	
 	
-
+	
+	public void actionPerformed(ActionEvent e) {
+		Object ob = e.getSource();
+		System.out.println("" + ob);
+	}
 }
