@@ -11,6 +11,7 @@ public class Game extends JFrame
 	private JLabel lblScores, lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4,
 		lblPlayer1Score, lblPlayer2Score, lblPlayer3Score, lblPlayer4Score;
 	private JButton btnBoard[][];
+	private JScrollPane scrollPane;
 
 	private int row = 20;
 	private int col = 20;
@@ -40,7 +41,7 @@ public class Game extends JFrame
 		
 		rightPanel_Game = new JPanel();
 		rightPanel_Game.setBackground(Color.LIGHT_GRAY);
-		rightPanel_Game.setBounds(655, 0, 155, 500);
+		rightPanel_Game.setBounds(655, 0, 170, 500);
 		getContentPane().add(rightPanel_Game);
 		rightPanel_Game.setLayout(null);
 		//.......... Panels ..........
@@ -108,8 +109,15 @@ public class Game extends JFrame
         
         
 		
-		//.......... Right Panel ..........
-		// Write your code here
+		//.......... Right Panel ..........	
+        scrollPane = new JScrollPane();
+        //(width, location,, height)
+        scrollPane.setBounds(125,0,160,100);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        rightPanel_Game.add(scrollPane);
+
+        
+        
 		//.......... Right Panel ..........
 		
 		
