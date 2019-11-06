@@ -287,9 +287,21 @@ class MainMenu extends JFrame implements ActionListener
         		intCPU = Integer.valueOf((String) ob2);
         		if (intHuman + intCPU >= 2 && intHuman + intCPU <= 4) 
         		{
-        			setVisible(false);
-                	Game gridWindow = new Game();
-				}
+        			//added
+        			if (chckbxEasy.isSelected() ) {
+        				setVisible(false);
+        				Game gridWindow = new Game(0);
+        			}
+        			else if (chckbxMedium.isSelected()) {
+        				setVisible(false);
+                    	Game gridWindow = new Game(30);
+        			}
+        			
+        			else if (chckbxHard.isSelected()) {
+        				setVisible(false);
+                    	Game gridWindow = new Game(15);
+        			}
+        		}
 			}
 		}
         else if (e.getSource().equals(comboBoxTheme))

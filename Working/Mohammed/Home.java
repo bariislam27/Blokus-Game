@@ -301,9 +301,9 @@ class MainMenu extends JFrame implements ActionListener
         				setVisible(false);
                     	Game gridWindow = new Game(15);
         			}
-        			}
-				}
+        		}
 			}
+		}
         else if (e.getSource().equals(comboBoxTheme))
         {
         	String selectedTheme = comboBoxTheme.getSelectedItem().toString();

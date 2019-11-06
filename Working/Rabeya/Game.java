@@ -124,10 +124,7 @@ public class Game extends JFrame implements ActionListener
 			b += 100;
 	    }
 		
-		for(JPanel piecePnl: piecePanels) {
-			
-		}
-		
+
 		int[][][] shapes = new Piece().getAllShapes();
 		
 		for (int i = 0; i < 21; i++) {

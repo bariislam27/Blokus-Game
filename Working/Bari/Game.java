@@ -1,28 +1,39 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.sun.source.util.TreePathScanner;
+
+import javax.swing.JLabel;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Game extends JFrame implements ActionListener
 {
-	private JPanel leftPanel_Game, centerPanel_Game, rightPanel_Game;
+	private JPanel leftPanel_Game, centerPanel_Game, rightPanel_Game, piecePanel[];
 	private JLabel lblScores, lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4,
-		lblPlayer1Score, lblPlayer2Score, lblPlayer3Score, lblPlayer4Score;
-	private JButton btnBoard[][];
-	private JScrollPane scrollPane;
+		lblPlayer1Score, lblPlayer2Score, lblPlayer3Score, lblPlayer4Score, thetime;
+	private JButton btnBoard[][], btnPiece;
+	private JScrollPane scrollPane, pane;
+	private Timer timer;
 
-	private int row = 20;
-	private int col = 20;
+	private int row, col, seconds, piecePanelY;
+
 	
-	
-	public Game()
+
+	public Game(int sec)
 	{
 		setTitle("Blokus");
-		setSize(800, 529);
+		setSize(810, 529);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
-
+		this.row = 20;
+     	this.col = 20;
 		
 		//.......... Panels ..........
 		leftPanel_Game = new JPanel();
@@ -38,10 +49,10 @@ public class Game extends JFrame implements ActionListener
 		centerPanel_Game.setLayout(new GridLayout(row, col));	
 		
 		rightPanel_Game = new JPanel();
-		rightPanel_Game.setBackground(Color.LIGHT_GRAY);
-		rightPanel_Game.setBounds(655, 0, 170, 500);
+		rightPanel_Game.setBackground(Color.BLACK);
+		rightPanel_Game.setBounds(655, 0, 170, 3150);
 		getContentPane().add(rightPanel_Game);
-		rightPanel_Game.setLayout(new GridLayout(5, 1));
+		rightPanel_Game.setLayout(null);
 		//.......... Panels ..........
 		
 		
@@ -86,6 +97,30 @@ public class Game extends JFrame implements ActionListener
 		lblPlayer4Score = new JLabel("00");
 		lblPlayer4Score.setBounds(90, 225, 66, 15);
 		leftPanel_Game.add(lblPlayer4Score);
+		
+		
+		
+		seconds = sec;
+	    thetime = new JLabel();
+        thetime.setFont(new Font("Courier", Font.PLAIN, 20));
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+            	if (seconds == 0) {
+            		thetime.setText("");
+            	}
+                if (seconds >= 1){
+                    thetime.setText("" + seconds--);
+                   }
+                   else{
+                       cancel();
+                   }
+               }
+           };
+
+         timer.schedule(task,0,1000);
+         leftPanel_Game.add(thetime);
+         thetime.setBounds(20, 10, 60, 60);
 		//.......... Left Panel ..........
 		
 
@@ -105,28 +140,32 @@ public class Game extends JFrame implements ActionListener
         
 		
 		//.......... Right Panel ..........	
-        JButton test = new JButton("a");
-        JButton test2 = new JButton("a");
-        test.setSize(165, 165);
-        test2.setSize(165, 165);
-//        //test = new JButton[row][col];
-//        for (int i = 1; i < 21; i++) {
-//        	//test[i].setSize(168,168);
-//        	rightPanel_Game.add(test[i]);
-//		}
-        rightPanel_Game.add(test);
-        rightPanel_Game.add(test2);
+        this.piecePanelY = 5;
+        piecePanel = new JPanel[21];
+        for (int i = 0; i < 21; i++) {
+        	piecePanel[i] = new JPanel();
+        	piecePanel[i].setBackground(Color.LIGHT_GRAY);
+        	piecePanel[i].setBounds(5, piecePanelY, 145, 145);
+    		rightPanel_Game.add(piecePanel[i]);
+    		piecePanel[i].setLayout(new GridLayout(7, 7));
+    		piecePanelY += 150;
+		}
         
-//        scrollPane = new JScrollPane();
-//        //(width, location,, height)
-//        scrollPane.setBounds(125,0,160,100);
-//        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//        rightPanel_Game.add(scrollPane);
-
-        
-      
-		//.......... Right Panel ..........
+        int[][][] shapes = new Piece().getAllShapes();
 		
+		for (int i = 0; i < 21; i++) {
+			for (int j = 0; j < 7; j++) {
+				
+				for (int k = 0; k < 7; k++) {
+					btnPiece = new JButton();
+					if (shapes [i][j][k] == 3) { btnPiece.setBackground(Color.RED); }
+					else {btnPiece.setVisible(false);}
+					piecePanel[i].add(btnPiece);
+				}
+				
+			}
+		}
+		//.......... Right Panel ..........
 		
 		setResizable(false);
 		setVisible(true);
