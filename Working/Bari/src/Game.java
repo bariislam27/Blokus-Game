@@ -51,11 +51,11 @@ public class Game extends JFrame implements ActionListener
 		getContentPane().add(rightPanel_Game);
 		rightPanel_Game.setLayout(null);
 		
-		rightPanel_Game = new JPanel();
-		rightPanel_Game.setBackground(Color.BLACK);
-		rightPanel_Game.setBounds(655, 0, 170, 3150);
-		getContentPane().add(rightPanel_Game);
-		rightPanel_Game.setLayout(null);
+		rightPanel2_Game = new JPanel();
+		rightPanel2_Game.setBackground(Color.BLACK);
+		rightPanel2_Game.setBounds(0, 0, 170, 3150);
+		rightPanel_Game.add(rightPanel2_Game);
+		rightPanel2_Game.setLayout(null);
 		//.......... Panels ..........
 		
 		
@@ -149,7 +149,7 @@ public class Game extends JFrame implements ActionListener
         	piecePanel[i] = new JPanel();
         	piecePanel[i].setBackground(Color.LIGHT_GRAY);
         	piecePanel[i].setBounds(5, piecePanelY, 145, 145);
-    		rightPanel_Game.add(piecePanel[i]);
+    		rightPanel2_Game.add(piecePanel[i]);
     		piecePanel[i].setLayout(new GridLayout(7, 7));
     		piecePanelY += 150;
 		}
@@ -171,10 +171,11 @@ public class Game extends JFrame implements ActionListener
 		}
 		
 		
-		scrollPieces = new JScrollPane(rightPanel_Game, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPieces.setBounds(655, 0, 170, 3150);
-		add(scrollPieces);
+		scrollPieces = new JScrollPane(rightPanel2_Game);
+		scrollPieces.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPieces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		scrollPieces.setBounds(0, 0, 170, 500);
+		rightPanel_Game.add(scrollPieces);
 		//.......... Right Panel ..........
 		
 		setResizable(false);
