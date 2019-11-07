@@ -181,6 +181,14 @@ public class GameBoard extends JFrame implements MouseListener
 		setResizable(false);
 		setVisible(true);
 	}	
+	public void changeColor() {
+		for(int i=0;i<col;i++) {
+			for(int j=0; j<col;j++) {
+				btnBoard[i][j].setBackground(Color.white);
+			}
+		}
+		
+	}
 	
 	
 	public void mouseClicked (MouseEvent e) {
@@ -188,6 +196,7 @@ public class GameBoard extends JFrame implements MouseListener
 			if (e.getSource() == piecePanel[i]) 
 			{
 				if(i==4) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 					btnBoard[0][0].setBackground(Color.RED);
 					btnBoard[0][1].setBackground(Color.RED);
@@ -198,6 +207,7 @@ public class GameBoard extends JFrame implements MouseListener
 					
 				}
 				else if(i==10) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 					btnBoard[0][0].setBackground(Color.RED);
 					btnBoard[0][1].setBackground(Color.RED);
@@ -206,6 +216,7 @@ public class GameBoard extends JFrame implements MouseListener
 					btnBoard[1][3].setBackground(Color.RED);
 				}
 				else if(i==11) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 					btnBoard[0][0].setBackground(Color.RED);
 					btnBoard[0][1].setBackground(Color.RED);
@@ -215,6 +226,7 @@ public class GameBoard extends JFrame implements MouseListener
 					
 				}
 				else if(i==13) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 	            	btnBoard[0][0].setBackground(Color.RED);
 					btnBoard[0][1].setBackground(Color.RED);
@@ -223,6 +235,7 @@ public class GameBoard extends JFrame implements MouseListener
 					
 				}
 				else if(i==15) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 	            	btnBoard[0][0].setBackground(Color.RED);
 					btnBoard[0][1].setBackground(Color.RED);
@@ -231,6 +244,7 @@ public class GameBoard extends JFrame implements MouseListener
 					
 				}
 				else if(i==16) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 	            	btnBoard[0][0].setBackground(Color.RED);
 					btnBoard[0][1].setBackground(Color.RED);
@@ -239,6 +253,7 @@ public class GameBoard extends JFrame implements MouseListener
 					
 				}
 				else if(i==18) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 	            	btnBoard[0][0].setBackground(Color.RED);
 					btnBoard[0][1].setBackground(Color.RED);
@@ -246,24 +261,21 @@ public class GameBoard extends JFrame implements MouseListener
 					
 				}
 				else if(i==19) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 	            	btnBoard[0][0].setBackground(Color.RED);
 					btnBoard[0][1].setBackground(Color.RED);
 					
 				}
 				else if(i==20) {
+					changeColor();
 					piecePanel[i].setVisible(false);
 	            	btnBoard[0][0].setBackground(Color.RED);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Invalid Choice");	
 				}
-			}
-
-
-			
-			
-			
+			}		
 		}
 	}
 	
