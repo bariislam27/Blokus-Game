@@ -3,12 +3,15 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import jdk.jfr.Enabled;
+
 import javax.swing.JLabel;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Game extends JFrame implements ActionListener
+public class Game extends JFrame implements MouseListener
 {
 	private JPanel leftPanel_Game, centerPanel_Game, rightPanel_Game, rightPanel2_Game, piecePanel[];
 	private JLabel lblScores, lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4,
@@ -127,7 +130,7 @@ public class Game extends JFrame implements ActionListener
         for (int i = 0; i < row; i++) {
         	for (int j = 0; j < col; j++) {
                 btnBoard[i][j] = new JButton();
-                btnBoard[i][j].addActionListener(this);
+                btnBoard[i][j].addMouseListener(this);
             centerPanel_Game.add(btnBoard[i][j]);
             btnBoard[i][j].setBackground(Color.white);
 	        }
@@ -147,6 +150,7 @@ public class Game extends JFrame implements ActionListener
         for (int i = 0; i < 21; i++) {
         	piecePanel[i] = new JPanel();
         	piecePanel[i].setBackground(Color.LIGHT_GRAY);
+        	piecePanel[i].addMouseListener(this);
         	//piecePanel[i].setBounds(5, piecePanelY, 145, 145);
     		rightPanel_Game.add(piecePanel[i]);
     		piecePanel[i].setLayout(new GridLayout(7, 7));
@@ -161,8 +165,14 @@ public class Game extends JFrame implements ActionListener
 			for (int j = 0; j < 7; j++) {
 				for (int k = 0; k < 7; k++) {
 					btnPiece = new JButton();
-					if (shapes [i][j][k] == 3) { btnPiece.setBackground(Color.RED); }
-					else {btnPiece.setVisible(false);}
+					if (shapes [i][j][k] == 3) { 
+						//btnPiece.setEnabled(false);
+						btnPiece.setBackground(Color.RED);
+						btnPiece.addMouseListener(this);
+					}
+					else {
+						btnPiece.setVisible(false);
+					}
 					piecePanel[i].add(btnPiece);
 				}
 			}
@@ -176,7 +186,28 @@ public class Game extends JFrame implements ActionListener
 	}	
 	
 	
-	public void actionPerformed(ActionEvent e) {
-		//
+	public void mouseClicked (MouseEvent e) {
+		for (int i = 0; i < 21; i++) {
+			if (e.getSource() == piecePanel[i]) 
+			{
+				piecePanel[i].setVisible(false);
+			}
+		}
 	}
+	
+	public void mouseEntered(MouseEvent e) {
+		//
+	}  
+	
+    public void mouseExited(MouseEvent e) {
+    	//
+    }
+    
+    public void mousePressed(MouseEvent e) {
+    	//
+    }
+    
+    public void mouseReleased(MouseEvent e) {
+    	//
+    } 
 }
