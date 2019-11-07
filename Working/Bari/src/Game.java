@@ -10,11 +10,11 @@ import java.util.TimerTask;
 
 public class Game extends JFrame implements ActionListener
 {
-	private JPanel leftPanel_Game, centerPanel_Game, rightPanel_Game, piecePanel[];
+	private JPanel leftPanel_Game, centerPanel_Game, rightPanel_Game, rightPanel2_Game, piecePanel[];
 	private JLabel lblScores, lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4,
 		lblPlayer1Score, lblPlayer2Score, lblPlayer3Score, lblPlayer4Score, thetime;
 	private JButton btnBoard[][], btnPiece;
-	private JScrollPane scrollPane, pane;
+	private JScrollPane scrollPieces;
 	private Timer timer;
 
 	private int row, col, seconds, piecePanelY;
@@ -44,6 +44,12 @@ public class Game extends JFrame implements ActionListener
 		centerPanel_Game.setBounds(155, 0, 500, 500);
 		getContentPane().add(centerPanel_Game);
 		centerPanel_Game.setLayout(new GridLayout(row, col));	
+		
+		rightPanel_Game = new JPanel();
+		rightPanel_Game.setBackground(Color.BLACK);
+		rightPanel_Game.setBounds(655, 0, 170, 3150);
+		getContentPane().add(rightPanel_Game);
+		rightPanel_Game.setLayout(null);
 		
 		rightPanel_Game = new JPanel();
 		rightPanel_Game.setBackground(Color.BLACK);
@@ -148,6 +154,7 @@ public class Game extends JFrame implements ActionListener
     		piecePanelY += 150;
 		}
         
+        
         int[][][] shapes = new Piece().getAllShapes();
 		
 		for (int i = 0; i < 21; i++) {
@@ -162,6 +169,12 @@ public class Game extends JFrame implements ActionListener
 				
 			}
 		}
+		
+		
+		scrollPieces = new JScrollPane(rightPanel_Game, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPieces.setBounds(655, 0, 170, 3150);
+		add(scrollPieces);
 		//.......... Right Panel ..........
 		
 		setResizable(false);
