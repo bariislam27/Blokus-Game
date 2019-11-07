@@ -9,3 +9,6 @@ To place a piece click on the right panel to choose a legal shape and it should 
 The timer changes per difficulty and is places on the left panel above the scores it will countdown
 
 We realise that doing the documentation and matching that to the code is easier said than done. We have written many things in our use cases descriptions that we were not able to implement in this iteration. Such as rotation and positioning. Also we only just realized  that we were creating a difficutly for the humans but we are suppose to make one for the computer ai. So by the end of next iteration we hopefully will have met all the correct requirements and implement what we have on our use cases and more.
+
+
+Our progress log and communication log is in Iteration 3 Plan -Updated
