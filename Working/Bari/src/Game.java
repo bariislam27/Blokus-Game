@@ -46,7 +46,7 @@ public class Game extends JFrame implements ActionListener
 		centerPanel_Game.setLayout(new GridLayout(row, col));	
 		
 		rightPanel_Game = new JPanel();
-		rightPanel_Game.setBackground(Color.BLACK);
+		rightPanel_Game.setBackground(Color.LIGHT_GRAY);
 		rightPanel_Game.setBounds(655, 0, 155, 500);
 		getContentPane().add(rightPanel_Game);
 		rightPanel_Game.setLayout(new GridLayout(11, 2));
@@ -132,6 +132,11 @@ public class Game extends JFrame implements ActionListener
             btnBoard[i][j].setBackground(Color.white);
 	        }
 	    }
+        
+        btnBoard[0][0].setBackground(Color.RED);
+        btnBoard[0][19].setBackground(Color.GREEN);
+        btnBoard[19][0].setBackground(Color.YELLOW);
+        btnBoard[19][19].setBackground(Color.BLUE);
 		//.......... Center Panel .......... 
         
         
@@ -152,16 +157,16 @@ public class Game extends JFrame implements ActionListener
         int[][][] shapes = new Piece().getAllShapes();
 		
 		for (int i = 0; i < 21; i++) {
+			
 			for (int j = 0; j < 7; j++) {
-				
 				for (int k = 0; k < 7; k++) {
 					btnPiece = new JButton();
 					if (shapes [i][j][k] == 3) { btnPiece.setBackground(Color.RED); }
 					else {btnPiece.setVisible(false);}
 					piecePanel[i].add(btnPiece);
 				}
-				
 			}
+			
 		}
 		
 		//.......... Right Panel ..........
