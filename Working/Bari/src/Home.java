@@ -135,7 +135,7 @@ class MainMenu extends JFrame implements ActionListener
 		lblCPUplayer.setBounds(410, 55, 115, 35);
 		panelNewGame_Home.add(lblCPUplayer);
 		
-		lblDurationE = new JLabel("No time limit"); 
+		lblDurationE = new JLabel("60 Sec/Turn"); 
 		lblDurationE.setFont(new Font("courier", Font.PLAIN, 13));
 		lblDurationE.setBounds(95, 175, 150, 20);
 		panelNewGame_Home.add(lblDurationE);
@@ -290,7 +290,7 @@ class MainMenu extends JFrame implements ActionListener
         			//added
         			if (chckbxEasy.isSelected() ) {
         				setVisible(false);
-        				Game gridWindow = new Game(0);
+        				Game gridWindow = new Game(60);
         			}
         			else if (chckbxMedium.isSelected()) {
         				setVisible(false);

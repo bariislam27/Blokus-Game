@@ -17,7 +17,9 @@ public class Piece {
     	int[][][] shapes = new int[21][SHAPE_SIZE][SHAPE_SIZE];
         int i = 0;
         
-        // * * * * *
+        
+    
+     // * * * * *
         shapes[i] = new int[][] { 
            {0, 0, 0, 0, 0, 0, 0},
            {0, 0, 0, 0, 0, 0, 0},
@@ -27,6 +29,7 @@ public class Piece {
            {0, 0, 0, 0, 0, 0, 0},
            {0, 0, 0, 0, 0, 0, 0}
         };
+        
         
         //*
         //* * * *
@@ -39,6 +42,7 @@ public class Piece {
            {0, 0, 0, 0, 0, 0, 0},
            {0, 0, 0, 0, 0, 0, 0}
         };
+        
         
         //*
         //*
