@@ -261,7 +261,9 @@ public class GameBoard extends JFrame implements MouseListener
 	            	btnBoard[0][0].setBackground(Color.RED);
 				}
 				else {
-					lblScores = new JLabel("Status");
+					lblScores = new JLabel("Please choose the correct shape");
+					lblScores.setFont(new Font("Dyuthi", Font.BOLD, 20));
+					lblScores.setBounds(45, 230, 85, 20);
 					leftPanel_Game.add(lblScores);
 					
 					
