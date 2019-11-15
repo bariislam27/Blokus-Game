@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -8,6 +9,8 @@ public class Player extends JPanel {
 	
 	Color color;
 	Piece[] piecePanels = new Piece[21];
+	public ArrayList<Button> LegalBoardPositions = new ArrayList<>();
+	public boolean isFirstMove = true;
 	
 	public Player(Color color){
 		this.color = color;
@@ -31,8 +34,7 @@ public class Player extends JPanel {
 						//piecePanels[i].numOfColoredButtons += 1;
 					}
 					else {
-					piecePanels[i].pieceButtons[j][k].setBackground(Color.BLACK);
-					piecePanels[i].pieceButtons[j][k].setBorderPainted(false);
+						piecePanels[i].pieceButtons[j][k].setVisible(false);	
 						
 					}
 				}

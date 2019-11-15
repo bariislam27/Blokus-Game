@@ -36,7 +36,7 @@ public static final int SHAPE_SIZE = 7;
 				b.setXY(i, j);
 				pieceButtons[i][j] = b;
 				add(b);
-				//addMouseListener(this);
+				addMouseListener(this); //CHANGED THIS	
 			}
 			
 			
@@ -334,12 +334,18 @@ public static final int SHAPE_SIZE = 7;
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		 Button clickedButton = (Button) e.getSource();
-		
-				
-			Game.pieceThatHasBeenClicked = this;
-			Game.pieceHasBeenClicked = true;
-			Game.pieceButtonThatHasBeenClicked = clickedButton;
+		  if (e.getSource() instanceof JPanel) {
+		    	System.out.println("small piece panel clicked");
+		    	Game.pieceHasBeenClicked = false;
+		  }
+		  
+		  else {
+			  Button clickedButton = (Button) e.getSource();
+				Game.pieceThatHasBeenClicked = this;
+				Game.pieceHasBeenClicked = true;
+				Game.pieceButtonThatHasBeenClicked = clickedButton;
+		  }
+
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class Game extends JFrame implements MouseListener, ActionListener
 	private static Button btnBoard[][];
 	//private JScrollPane scrollPieces;
 	private Timer timer;
-
+	
 	private int row, col, seconds, piecePanelY;
 	//private static int boardButtonX;
 	//private static int boardButtonY;
@@ -32,11 +32,11 @@ public class Game extends JFrame implements MouseListener, ActionListener
 	public Button boardButtonThatHasBeenClicked;
 	public static Piece pieceThatHasBeenClicked = null;
 	
-	public static Player Players[] =new Player[4];
+	public static Player Players[] =new Player[5];
 	public static Color pieceColors[] =new Color[4];
 	
 
-	
+	private Player currentPlayer ;
 
 	public Game(int sec)
 	{
@@ -67,10 +67,10 @@ public class Game extends JFrame implements MouseListener, ActionListener
 		getContentPane().add(leftPanel_Game);
 		getContentPane().add(centerPanel_Game);
 		
-		pieceColors[0] = Color.BLUE ;
+		pieceColors[0] = Color.red ;
         pieceColors[1] = Color.YELLOW  ;
         pieceColors[2] = Color.GREEN ;
-        pieceColors[3] = Color.RED;
+        pieceColors[3] = Color.BLUE;
         
         for (int i = 0; i <4; i++) {
         	Players[i] = new Player(pieceColors[i]);
@@ -80,8 +80,21 @@ public class Game extends JFrame implements MouseListener, ActionListener
     		getContentPane().add(Players[i]);
         }
         
-        Players[0].setVisible(true);
         
+        
+        
+
+
+        
+        
+       JPanel player = new Player(Color.PINK);
+       player.setBackground(Color.LIGHT_GRAY);
+       player.setVisible(false);
+       player.setBounds(655, 0, 155, 500);
+	   getContentPane().add(player);
+        
+	   currentPlayer = Players[0];
+	   Players[0].setVisible(true);
         
         
         
@@ -191,9 +204,9 @@ public class Game extends JFrame implements MouseListener, ActionListener
 	        }
 	    }
         
-        btnBoard[0][19].setBackground(Color.GREEN);
-        btnBoard[19][0].setBackground(Color.YELLOW);
-        btnBoard[19][19].setBackground(Color.BLUE);
+//        btnBoard[0][19].setBackground(Color.GREEN);
+//        btnBoard[19][0].setBackground(Color.YELLOW);
+//        btnBoard[19][19].setBackground(Color.BLUE);
 		//.......... Center Panel ..........
         
 
@@ -204,9 +217,27 @@ public class Game extends JFrame implements MouseListener, ActionListener
 		
 		//.......... Right Panel ..........
 		
+        
+//        pieceColors[0] = Color.red ;
+//        pieceColors[1] = Color.YELLOW  ;
+//        pieceColors[2] = Color.GREEN ;
+//        pieceColors[3] = Color.BLUE;
       
      
-        //centerPanel_Game.repaint();
+      Players[0].LegalBoardPositions.add(btnBoard[0][0]);
+      Players[1].LegalBoardPositions.add(btnBoard[19][0]);
+      Players[2].LegalBoardPositions.add(btnBoard[19][19]);
+      Players[3].LegalBoardPositions.add(btnBoard[0][19]);
+      
+//      if (currentPlayer.LegalBoardPositions.contains(btnBoard[0][0]) ) {
+//    	  System.out.println("Player 0 passed first test");
+//    	  
+//      }
+//      if (!currentPlayer.LegalBoardPositions.contains(btnBoard[0][19]) ) {
+//    	  System.out.println("Player 1 passed second test");
+//    	  
+//      }
+        
 		setResizable(false);
 		setVisible(true);
 	}	
@@ -243,26 +274,34 @@ public class Game extends JFrame implements MouseListener, ActionListener
 		BoardButtonHasBeenClicked = true;
 		boardButtonThatHasBeenClicked = brdButton;
 		System.out.println("Movepiece on board");
-		MovePieceOnBoard( );
-		//if ( isValidMove() ) {
+		
+		if (pieceHasBeenClicked) {
+			try {
+				HandleInValidMove( );
+				MovePieceOnBoard( );
+				
+			}
 			
-		//}
-		
-	
-		
-		
-//		try {
-		
+//			catch(IllegalMoveException ex) {  
+//				JOptionPane.showMessageDialog(this, "Pieces overlap", "Illegal move",  JOptionPane.INFORMATION_MESSAGE);
+//				
+//			}  
+//			
+//			catch(IndexOutOfBoundsException ex) {  
+//				JOptionPane.showMessageDialog(this, "piece out of board", "Illegal move",  JOptionPane.INFORMATION_MESSAGE);
+//				
+//			}  
+			
+			
+			catch(Exception ex){
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Illegal move",  JOptionPane.INFORMATION_MESSAGE);
+		}
+			
+		}
+//		Button b1 = new Button();
+//		if (! ( currentPlayer.LegalBoardPositions.contains(b1)) ) {
+//			System.out.println("test passed");
 //		}
-//		catch(ArithmeticException error) {
-//			pieceOutofBoard.setVisible(false);
-//			piecesOverlap.setVisible(true);
-//		}
-//		catch(IndexOutOfBoundsException error) {
-//			piecesOverlap.setVisible(false);
-//			pieceOutofBoard.setVisible(true);
-//		}
-
 
     } 
 	
@@ -270,46 +309,42 @@ public class Game extends JFrame implements MouseListener, ActionListener
 		
 	}
 	
-	public  boolean isValidMove( ){
+	public void  HandleInValidMove( ) throws Exception{
 		
-//		if (pieceHasBeenClicked && BoardButtonHasBeenClicked) {
-//			int boardBtnXCord =     boardButtonThatHasBeenClicked.x ;
-//			int boardBtnYCord =  boardButtonThatHasBeenClicked.y ;
-//	
-//			
-//			int pieceBtnXCord = pieceButtonThatHasBeenClicked.x ;
-//			int pieceBtnYCord = pieceButtonThatHasBeenClicked.y ;
-//			
-//			
-//			System.out.println("Board button x:  " + boardBtnXCord + ", Board button y: " + boardBtnYCord);
-//			System.out.println("Piece button x:  " + pieceBtnXCord + ", Piece button y: " + pieceBtnYCord);
-//			
-//			Button[][] ArrayOfPieceButtons = pieceThatHasBeenClicked.pieceButtons;
-//			
-//
-//			for (int i = 0; i < ArrayOfPieceButtons.length; i++) {
-//				int xDist = i - pieceBtnXCord ;                                                 //pieceThatHasBeenClicked.pieceButtons
-//				for (int j = 0; j <ArrayOfPieceButtons[0].length; j++) {
-//					int yDist = j - pieceBtnYCord ;	
-//					
-//					//if (btnBoard[boardBtnXCord+xDist][boardBtnYCord+yDist].getBackground() != Color.WHITE) {
-////					if ( boardBtnXCord+xDist < 0 || boardBtnXCord+xDist >= btnBoard.length || boardBtnYCord+yDist<0 || boardBtnYCord+yDist >= btnBoard[0].length  ) {
-////						JOptionPane.showMessageDialog(this, "Piece out of board", "Illegal move!", JOptionPane.INFORMATION_MESSAGE);
-////						return false;
-////					}	
-//					
-//					if (btnBoard[boardBtnXCord+xDist][boardBtnYCord+yDist].getBackground() != Color.WHITE) {
-//						JOptionPane.showMessageDialog(this, "Pieces overlap", "Illegal move!", JOptionPane.INFORMATION_MESSAGE);
-//						return false;
-//					}	
-//					
-//					
-//				}
-//			}
-//			
-//		}
+//      if (!currentPlayer.LegalBoardPositions.contains(boardButtonThatHasBeenClicked) ) {
+//    	  throw new Exception("Piece must be placed on the first tile of the respective player");
+//  	  
+//    }
 		
-		return true;
+			int boardBtnrowPos =     boardButtonThatHasBeenClicked.x ;
+			int boardBtncolPos =  boardButtonThatHasBeenClicked.y ;
+	
+			
+			int pieceBtnrowPos = pieceButtonThatHasBeenClicked.x ;
+			int pieceBtncolPos = pieceButtonThatHasBeenClicked.y ;
+
+			Button[][] ArrayOfPieceButtons = pieceThatHasBeenClicked.pieceButtons;
+			
+
+			for (int i = 0; i < ArrayOfPieceButtons.length; i++) {
+				int rowDist = i - pieceBtnrowPos ;                   
+				for (int j = 0; j <ArrayOfPieceButtons[0].length; j++) {
+					int colDist = j - pieceBtncolPos ;	
+					if( ArrayOfPieceButtons[i][j].isVisible()  ) {
+						
+						if( (boardBtnrowPos+rowDist) <0 || boardBtnrowPos+rowDist>= btnBoard.length || boardBtncolPos+colDist<0	|| boardBtncolPos+colDist>=btnBoard.length )
+							          { throw new Exception("Piece out of board");}
+						else if(btnBoard[boardBtnrowPos+rowDist][boardBtncolPos+colDist].getBackground() != Color.WHITE) {
+							throw new Exception("Pieces overlap!");
+						}
+							
+						
+	
+					}
+					
+				}
+			}
+
 	}
 	
 	
@@ -317,45 +352,55 @@ public class Game extends JFrame implements MouseListener, ActionListener
 
 	public  void MovePieceOnBoard( ){ //PiecepieceThatHasBeenClicked, int coloredButtons[][]
 		
-		if (pieceHasBeenClicked && BoardButtonHasBeenClicked) {
-			int boardBtnXCord =     boardButtonThatHasBeenClicked.x ;
-			int boardBtnYCord =  boardButtonThatHasBeenClicked.y ;
+		//if (pieceHasBeenClicked && BoardButtonHasBeenClicked) {
+			int boardBtnrowPos =     boardButtonThatHasBeenClicked.x ;
+			int boardBtncolPos =  boardButtonThatHasBeenClicked.y ;
 	
 			
-			int pieceBtnXCord = pieceButtonThatHasBeenClicked.x ;
-			int pieceBtnYCord = pieceButtonThatHasBeenClicked.y ;
+			int pieceBtnrowPos = pieceButtonThatHasBeenClicked.x ;
+			int pieceBtncolPos = pieceButtonThatHasBeenClicked.y ;
 			
 			
-			System.out.println("Board button x:  " + boardBtnXCord + ", Board button y: " + boardBtnYCord);
-			System.out.println("Piece button x:  " + pieceBtnXCord + ", Piece button y: " + pieceBtnYCord);
+			System.out.println("Board button x:  " + boardBtnrowPos + ", Board button y: " + boardBtncolPos);
+			System.out.println("Piece button x:  " + pieceBtnrowPos + ", Piece button y: " + pieceBtncolPos);
 			
 			Button[][] ArrayOfPieceButtons = pieceThatHasBeenClicked.pieceButtons;
 			
 
 			for (int i = 0; i < ArrayOfPieceButtons.length; i++) {
-				int xDist = i - pieceBtnXCord ;                                                 //pieceThatHasBeenClicked.pieceButtons
+				int rowDist = i - pieceBtnrowPos ;                   
 				for (int j = 0; j <ArrayOfPieceButtons[0].length; j++) {
-					int yDist = j - pieceBtnYCord ;	
-					if( ArrayOfPieceButtons[i][j].getBackground() != Color.BLACK ) {
-						//if (btnBoard[boardBtnXCord+xDist][boardBtnYCord+yDist].getBackground() != Color.WHITE) {
-							//throw new ArithmeticException();
-						//}
-						//else{
-							btnBoard[boardBtnXCord+xDist][boardBtnYCord+yDist].setBackground(ArrayOfPieceButtons[i][j].getBackground());
-						//}
+					int colDist = j - pieceBtncolPos ;	
+					if( ArrayOfPieceButtons[i][j].isVisible()  ) {
+						
+						btnBoard[boardBtnrowPos+rowDist][boardBtncolPos+colDist].setBackground(ArrayOfPieceButtons[i][j].getBackground());
+							
+						
 						
 					}
 					
 				}
 			}
 			
-		}
+		//}
 		pieceOutofBoard.setVisible(false);
 		pieceThatHasBeenClicked.setVisible(false);
 		pieceHasBeenClicked = false;
 		BoardButtonHasBeenClicked = false;
 		
-		changePlayer();
+	      
+	        TimerTask task = new TimerTask()  {
+	        	
+
+				@Override
+				public void run() {
+					changePlayer();
+					
+				}
+	        };
+	           
+	       Timer timer = new Timer();
+	       timer.schedule(task, 700);
 		
      }
 	
@@ -371,7 +416,8 @@ public class Game extends JFrame implements MouseListener, ActionListener
 	public void changePlayer() {
 		int currentPlayersIndex = currentPlayersIndex();
 		Players[currentPlayersIndex].setVisible(false);
-		Players[ (currentPlayersIndex+1)%4 ].setVisible(true);
+		Players[ (currentPlayersIndex+1) % 4 ].setVisible(true);
+		currentPlayer = Players[ (currentPlayersIndex+1) % 4 ];
 	};
 		
 
@@ -383,10 +429,10 @@ public class Game extends JFrame implements MouseListener, ActionListener
 	         super();
 	      }
 	      
-	      public IllegalMoveException(String message)
-	      {
-	         super(message);
-	      }
+//	      public void HandleIllegalMoveException(String message)
+//	      {
+//	    	  JOptionPane.showMessageDialog(gridWindow, message, "Illegal move",  JOptionPane.INFORMATION_MESSAGE);
+//	      }
 	   }
 	
 }
