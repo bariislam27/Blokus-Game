@@ -26,9 +26,9 @@ class MainMenu extends JFrame implements ActionListener
 {
 	private String humanPlayer[] = {"1", "2", "3", "4"};
 	private String CPUplayer[] = {"3", "2", "1", "0"};
-	private String[] themes = {"Default", "Fire", "Ice"};
-	public Color plOneColor = new Color(30, 144, 255), plTwoColor = new Color(0, 255, 0), plThreeColor = new Color(255, 255, 0), plFourColor = new Color(169, 169, 169), backgroundColor = new Color(255, 255, 255), GameboardColor;
-	
+	private String[] themes = {"Default", "Fire", "Ice", "Earth", "Rainbow"};
+	public static Color plOneColor = new Color(30, 144, 255), plTwoColor = new Color(0, 255, 0), plThreeColor = new Color(255, 255, 0), plFourColor = new Color(169, 169, 169), backgroundColor = new Color(255, 255, 255), GameboardColor;
+	 
 	private JPanel panelTop_Home, panelBottomMain_Home, panelNewGame_Home, panelSettings_Home, panelCpuPlayers_Home;
 	private JLabel lblTitle_Home, lblSettings, lblChoosePlayers, lblDifficulty, lblDurationE, lblDurationM, 
 		lblDurationH, lblHumanPlayer, lblCPUplayer;
@@ -103,6 +103,7 @@ class MainMenu extends JFrame implements ActionListener
 		btnResume_Home.setFont(new Font("courier", Font.PLAIN, 23));
 		btnResume_Home.setBackground(plThreeColor);
 		btnResume_Home.setBounds(240, 107, 220, 45);
+		btnResume_Home.addActionListener(this);
 		panelBottomMain_Home.add(btnResume_Home);
 		
 		btnSettings_Home = new JButton("Settings");
@@ -165,7 +166,7 @@ class MainMenu extends JFrame implements ActionListener
 		panelNewGame_Home.add(comboBoxCPUplayer);
 		
 		chckbxEasy = new JCheckBox("Easy");
-		chckbxEasy.setBackground(Color.GREEN);
+		chckbxEasy.setBackground(plTwoColor);
 		chckbxEasy.setFont(new Font("courier", Font.PLAIN, 20));
 		chckbxEasy.setBounds(88, 140, 115, 35);
 		chckbxEasy.setSelected(true);
@@ -173,14 +174,14 @@ class MainMenu extends JFrame implements ActionListener
 		panelNewGame_Home.add(chckbxEasy);
 		
 	    chckbxMedium = new JCheckBox("Medium");
-		chckbxMedium.setBackground(Color.ORANGE);
+		chckbxMedium.setBackground(plThreeColor);
 		chckbxMedium.setFont(new Font("courier", Font.PLAIN, 20));
 		chckbxMedium.setBounds(291, 140, 115, 35);
 		chckbxMedium.addActionListener(this);
 		panelNewGame_Home.add(chckbxMedium);
 		
 		chckbxHard = new JCheckBox("Hard");
-		chckbxHard.setBackground(Color.RED);
+		chckbxHard.setBackground(plFourColor);
 		chckbxHard.setFont(new Font("courier", Font.PLAIN, 20));
 		chckbxHard.setBounds(494, 140, 115, 35);
 		chckbxHard.addActionListener(this);
@@ -253,12 +254,46 @@ class MainMenu extends JFrame implements ActionListener
 		panelTop_Home.setBackground(plOneColor);
 		btnNewGame_Home.setBackground(plTwoColor);
 		btnResume_Home.setBackground(plThreeColor);
-		btnSettings_Home.setBackground(plFourColor);	
+		btnSettings_Home.setBackground(plFourColor);
+		chckbxEasy.setBackground(plTwoColor);
+		chckbxMedium.setBackground(plThreeColor);
+		chckbxHard.setBackground(plFourColor);
+			
 	}
-	
+	public static Color getPlayerColor(int player)
+	{
+		if (player == 0)
+		{
+				return plOneColor;
+		}
+		else if (player == 1)
+		{
+			return plTwoColor;
+		}
+		else if (player == 2)
+		{
+			return plThreeColor;
+		}
+		else if  (player == 3)
+		{
+			return plFourColor;
+		}
+		else {
+			return Color.WHITE;
+		}
+		
+		
+	}
 	
 	public void actionPerformed(ActionEvent e) 
     {
+		if (e.getSource().equals(btnResume_Home)) 
+        {
+			setVisible(false);
+			System.out.println("hi");
+			Game gridWindow = new Game(0);
+			
+        }
         if (e.getSource().equals(btnNewGame_Home)) 
         {
         	panelNewGame_Home.setVisible(true);
@@ -290,16 +325,16 @@ class MainMenu extends JFrame implements ActionListener
         			//added
         			if (chckbxEasy.isSelected() ) {
         				setVisible(false);
-        				Game gridWindow = new Game(60);
+        				Game gridWindow = new Game(1);
         			}
         			else if (chckbxMedium.isSelected()) {
         				setVisible(false);
-                    	Game gridWindow = new Game(30);
+        				Game gridWindow = new Game(1);
         			}
-        			
+
         			else if (chckbxHard.isSelected()) {
         				setVisible(false);
-                    	Game gridWindow = new Game(15);
+        				Game gridWindow = new Game(1);
         			}
         		}
 			}
@@ -334,6 +369,24 @@ class MainMenu extends JFrame implements ActionListener
         		updateColors();
         		
         	}	
+        	else if (selectedTheme == "Earth")
+        	{
+        		plOneColor = new Color(255, 111, 0);
+        		plTwoColor = new Color(140, 98, 34);
+        		plThreeColor = new Color(55, 255, 0);
+        		plFourColor = new Color(100, 100, 100);
+        		updateColors();
+        		
+        	}
+        	else if (selectedTheme == "Rainbow")
+        	{
+        		plOneColor = new Color(255, 0, 0);
+        		plTwoColor = new Color(47, 255, 0);
+        		plThreeColor = new Color(0, 200, 255);
+        		plFourColor = new Color(171, 0, 157);
+        		updateColors();
+        		
+        	}
         }
     }
 }

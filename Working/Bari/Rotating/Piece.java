@@ -1,7 +1,15 @@
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JPanel;
 
 public class Piece {
-	public static final int SHAPE_SIZE = 7;
+	
+public static final int SHAPE_SIZE = 7;
 	
 	
 	// Types of error during put the piece on the board.
@@ -9,9 +17,12 @@ public class Piece {
 	public static final String ADJACENCY_ERROR = "Pieces of the same color cannot share edges with one another.";
 	public static final String OVERLAP_ERROR = "Pieces cannot overlap.";
 	public static final String START_ERROR = "Starting peice must occupy the player's respective corner.";
-	public static final String CORNER_ERROR = "Pieces must be connected to at least one other piece of the the same color by the corner.";
-    
+	public static final String CORNER_ERROR = "Pieces must be connected to at least one other piece of the the same color by the corner.";	
 	
+	public int numOfColoredButtons = 0;
+	
+	
+
 	// This function makes different shape of pieces.
     public static int[][][] getAllShapes(){
     	int[][][] shapes = new int[21][SHAPE_SIZE][SHAPE_SIZE];
@@ -289,15 +300,12 @@ public class Piece {
            {0, 0, 0, 0, 0, 0, 0}
         };
     	return shapes;
+    	
+    	
+    	
+    	
+    
     }
-
-
-
-
-
-
-
-
-
+    
 
 }
