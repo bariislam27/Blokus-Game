@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 
-class Home extends JFrame implements ActionListener
+public class Home extends JFrame implements ActionListener
 {
 	private String humanPlayer[] = {"1", "2", "3", "4"};
 	private String CPUplayer[] = {"3", "2", "1", "0"};
@@ -370,4 +370,22 @@ class Home extends JFrame implements ActionListener
         	}
         }
     }
+	public int getIntHuman() {
+		return intHuman;
+	}
+
+
+	public void setIntHuman(int intHuman) {
+		this.intHuman = intHuman;
+	}
+
+
+	public int getIntCPU() {
+		return intCPU;
+	}
+
+
+	public void setIntCPU(int intCPU) {
+		this.intCPU = intCPU;
+	}
 }

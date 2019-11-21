@@ -45,6 +45,10 @@ public class Player extends JPanel {
 			
 		}
 	}
+	
+	public boolean getFirstMove(){
+		return isFirstMove;
+	}
     
 
 }

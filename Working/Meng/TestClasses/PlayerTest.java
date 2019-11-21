@@ -5,6 +5,8 @@ import java.awt.Color;
 
 import org.junit.jupiter.api.Test;
 
+import GameClasses.Player;
+
 class PlayerTest {
 
 	@Test

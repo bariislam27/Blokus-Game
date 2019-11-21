@@ -19,17 +19,16 @@ public class Game extends JFrame implements MouseListener, ActionListener {
 	private JPanel leftPanel_Game, centerPanel_Game, rightPanel_Game;
 	private Piece piecePanel[];
 	private JLabel lblScores, lblPlayer1, lblPlayer2, lblPlayer3, lblPlayer4, lblPlayer1Score, lblPlayer2Score,
-			lblPlayer3Score, lblPlayer4Score, thetime, pieceOutofBoard, piecesOverlap;
+			lblPlayer3Score, lblPlayer4Score, pieceOutofBoard, piecesOverlap;
 	static boolean pieceHasBeenClicked = false, BoardButtonHasBeenClicked = false, pieceHasBeenPlaced = true;
 	private static Button btnBoard[][];
 	private static Button btnBoardTemp[][];
 	// private JScrollPane scrollPieces;
-	private Timer timer;
+
 
 	private static int row;
 	private static int col;
-	private int seconds;
-	private int piecePanelY;
+
 	private int scores[] = new int[4];
 
 	public static Button pieceButtonThatHasBeenClicked;
@@ -46,7 +45,7 @@ public class Game extends JFrame implements MouseListener, ActionListener {
 	private JButton btnSave, btnres, btnRotate, btnFlip;
 	private int playersIndex, difficulty;
 
-	public Game(int diff) {	
+	public Game(int diff) {
 		difficulty = diff;
 		setTitle("Blokus");
 		setSize(835, 538);
@@ -94,7 +93,6 @@ public class Game extends JFrame implements MouseListener, ActionListener {
 		currentPlayer = Players[0];
 		currentPlayer.setVisible(true);
 		// .......... Panels ..........
-		
 
 		// .......... Left Panel ..........
 		pieceOutofBoard = new JLabel("Piece out of board");
@@ -232,6 +230,25 @@ public class Game extends JFrame implements MouseListener, ActionListener {
 			scores[p] += s;
 			lblPlayer4Score.setText(String.valueOf(scores[3]));
 		}
+	}
+	
+	public int updateScores(int p, int s) {
+
+		if (p == 0) {
+
+			scores[p] += s;
+			lblPlayer1Score.setText(String.valueOf(scores[0]));
+		} else if (p == 1) {
+			scores[p] += s;
+			lblPlayer2Score.setText(String.valueOf(scores[1]));
+		} else if (p == 2) {
+			scores[p] += s;
+			lblPlayer3Score.setText(String.valueOf(scores[2]));
+		} else if (p == 3) {
+			scores[p] += s;
+			lblPlayer4Score.setText(String.valueOf(scores[3]));
+		}
+		return s;
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -507,10 +524,7 @@ public class Game extends JFrame implements MouseListener, ActionListener {
 
 			for (int i = 0; i < row; i++) {
 				for (int j = 0; j < col; j++) {
-//            		String rep = ("java.awt.Color"); 
-//            		String fullString = btnBoard[i][j].getBackground().toString();
-//            		fullString = fullString.replaceAll(rep,"");
-//            		gamesave.write(fullString + '\n');
+
 					if (btnBoard[i][j].getBackground() == Home.getPlayerColor(0)) {
 						gamesave.write("1" + '\n');
 					}
@@ -538,8 +552,6 @@ public class Game extends JFrame implements MouseListener, ActionListener {
 
 	public void savePlayer() {
 		int cp = 0;
-		int p = currentPlayersIndex();
-		String str1 = Integer.toString(p);
 
 		try (FileWriter writer = new FileWriter("save1.txt"); BufferedWriter gamesave = new BufferedWriter(writer)) {
 			while (cp != 4) {
@@ -649,43 +661,7 @@ public class Game extends JFrame implements MouseListener, ActionListener {
 			int j = 0;
 			while (j != col) {
 				while (i != row) {
-					String line = (aline);
-//					String[] color = line.split(",");
-//					String red = color[0].replace("[r=","");
-//					String green = color[1].replace("g=","");
-//					String blue = color[2].replace("b=","");
-//					blue = blue.replace("]","");
-//
-//					Integer r1 = Integer.valueOf(red);
-//					Integer g1 = Integer.valueOf(green);
-//					Integer b1 = Integer.valueOf(blue);
-//					
-//					
-//					btnBoard[j][i].setBackground(new Color(r1,g1,b1));
-//					btnBoard[j][i].setVisible(true);
-//					
-//					if (r1 == 255 && g1 == 255 && b1 == 255) {
-//						btnBoard[j][i].setBackground(Color.WHITE);
-//						btnBoard[j][i].setVisible(true);
-//					}
-//					else if (r1 == 255 && g1 == 0 && b1 == 0) {
-//						btnBoard[j][i].setBackground(Color.red);
-//						btnBoard[j][i].setVisible(true);
-//					}
-//					else if (r1 == 255 && g1 == 255 && b1 == 0) {
-//						btnBoard[j][i].setBackground(Color.YELLOW);
-//						btnBoard[j][i].setVisible(true);
-//					}
-//					
-//					else if (r1 == 0 && g1 == 255 && b1 == 0) {
-//						btnBoard[j][i].setBackground(Color.GREEN);
-//						btnBoard[j][i].setVisible(true);
-//					}
-//					
-//					else if (r1 == 0 && g1 == 0 && b1 == 255) {
-//						btnBoard[j][i].setBackground(Color.BLUE);
-//						btnBoard[j][i].setVisible(true);
-//					}
+
 					Integer pr = Integer.valueOf(aline);
 					if (pr == 1) {
 						btnBoard[j][i].setBackground(Home.getPlayerColor(0));
@@ -715,14 +691,8 @@ public class Game extends JFrame implements MouseListener, ActionListener {
 		public IllegalMoveException() {
 			super();
 		}
-
-//	      public void HandleIllegalMoveException(String message)
-//	      {
-//	    	  JOptionPane.showMessageDialog(gridWindow, message, "Illegal move",  JOptionPane.INFORMATION_MESSAGE);
-//	      }
 	}
 
 }
-
 
 
