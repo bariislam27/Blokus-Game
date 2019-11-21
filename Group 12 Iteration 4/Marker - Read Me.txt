@@ -1,0 +1,5 @@
+Run the jar file:
+
+* Open terminal/command prompt
+* type java -jar Blokus-Game.jar
+* Hit enter
