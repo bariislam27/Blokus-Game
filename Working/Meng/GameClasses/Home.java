@@ -12,6 +12,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -314,6 +315,8 @@ class Home extends JFrame implements ActionListener
         				setVisible(false);
         				Game gridWindow = new Game(1);
         			}
+        		}else {
+        			JOptionPane.showMessageDialog(this, "Players cannot be more than 4");
         		}
 			}
 		}
