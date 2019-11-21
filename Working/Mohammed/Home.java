@@ -1,3 +1,5 @@
+//package GameClasses;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -11,27 +13,20 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-public class Home
-{
-	public static void main(String[] args) 
-	{
-		MainMenu start = new MainMenu();	
-	}
-}
 
-class MainMenu extends JFrame implements ActionListener
+class Home extends JFrame implements ActionListener
 {
 	private String humanPlayer[] = {"1", "2", "3", "4"};
 	private String CPUplayer[] = {"3", "2", "1", "0"};
-	private String[] themes = {"Default", "Fire", "Ice"};
-	public Color plOneColor = new Color(30, 144, 255), plTwoColor = new Color(0, 255, 0), plThreeColor = new Color(255, 255, 0), plFourColor = new Color(169, 169, 169), backgroundColor = new Color(255, 255, 255), GameboardColor;
-	
+	private String[] themes = {"Default", "Fire", "Ice", "Earth", "Rainbow"};
+	public static Color plOneColor = new Color(30, 144, 255), plTwoColor = new Color(0, 255, 0), plThreeColor = new Color(255, 255, 0), plFourColor = new Color(169, 169, 169), backgroundColor = new Color(255, 255, 255), GameboardColor;
+	 
 	private JPanel panelTop_Home, panelBottomMain_Home, panelNewGame_Home, panelSettings_Home, panelCpuPlayers_Home;
-	private JLabel lblTitle_Home, lblSettings, lblChoosePlayers, lblDifficulty, lblDurationE, lblDurationM, 
-		lblDurationH, lblHumanPlayer, lblCPUplayer;
+	private JLabel lblTitle_Home, lblSettings, lblChoosePlayers, lblDifficulty, lblHumanPlayer, lblCPUplayer;
 	private JButton btnNewGame_Home, btnResume_Home, btnSettings_Home, btnGoBack_NewGame, 
 		btnGoBack_Settings, btnStartGame_ChoosePlayers;
 	private JCheckBox chckbxHints, chckbxCpuPlayer1, chckbxCpuPlayer2, chckbxCpuPlayer3, 
@@ -39,10 +34,11 @@ class MainMenu extends JFrame implements ActionListener
 	private JComboBox comboBoxTheme, comboBoxPlayer, comboBoxCPUplayer;
 	private ButtonGroup difficlutyGrp;
 	
-	private int intHuman, intCPU;
+	private int intHuman, intCPU, difficulty;
+	private boolean hints;
 	
 	
-	public MainMenu() 
+	public Home() 
 	{
 		setTitle("Blokus");
 		setSize(700, 400);
@@ -103,6 +99,7 @@ class MainMenu extends JFrame implements ActionListener
 		btnResume_Home.setFont(new Font("courier", Font.PLAIN, 23));
 		btnResume_Home.setBackground(plThreeColor);
 		btnResume_Home.setBounds(240, 107, 220, 45);
+		btnResume_Home.addActionListener(this);
 		panelBottomMain_Home.add(btnResume_Home);
 		
 		btnSettings_Home = new JButton("Settings");
@@ -135,21 +132,6 @@ class MainMenu extends JFrame implements ActionListener
 		lblCPUplayer.setBounds(410, 55, 115, 35);
 		panelNewGame_Home.add(lblCPUplayer);
 		
-		lblDurationE = new JLabel("No time limit"); 
-		lblDurationE.setFont(new Font("courier", Font.PLAIN, 13));
-		lblDurationE.setBounds(95, 175, 150, 20);
-		panelNewGame_Home.add(lblDurationE);
-		
-		lblDurationM = new JLabel("30 Sec/Turn"); 
-		lblDurationM.setFont(new Font("courier", Font.PLAIN, 13));
-		lblDurationM.setBounds(300, 175, 150, 20);
-		panelNewGame_Home.add(lblDurationM);
-		
-		lblDurationH = new JLabel("15 Sec/Turn"); 
-		lblDurationH.setFont(new Font("courier", Font.PLAIN, 13));
-		lblDurationH.setBounds(505, 175, 150, 20);
-		panelNewGame_Home.add(lblDurationH);
-		
 		comboBoxPlayer = new JComboBox(humanPlayer);
 		comboBoxPlayer.setBackground(Color.LIGHT_GRAY);
 		comboBoxPlayer.setFont(new Font("courier", Font.PLAIN, 20));
@@ -164,23 +146,24 @@ class MainMenu extends JFrame implements ActionListener
 		comboBoxCPUplayer.addActionListener(this);
 		panelNewGame_Home.add(comboBoxCPUplayer);
 		
+		hints = true;
 		chckbxEasy = new JCheckBox("Easy");
-		chckbxEasy.setBackground(Color.GREEN);
+		chckbxEasy.setBackground(plTwoColor);
 		chckbxEasy.setFont(new Font("courier", Font.PLAIN, 20));
 		chckbxEasy.setBounds(88, 140, 115, 35);
-		chckbxEasy.setSelected(true);
+		chckbxEasy.setSelected(hints);
 		chckbxEasy.addActionListener(this);
 		panelNewGame_Home.add(chckbxEasy);
 		
 	    chckbxMedium = new JCheckBox("Medium");
-		chckbxMedium.setBackground(Color.ORANGE);
+		chckbxMedium.setBackground(plThreeColor);
 		chckbxMedium.setFont(new Font("courier", Font.PLAIN, 20));
 		chckbxMedium.setBounds(291, 140, 115, 35);
 		chckbxMedium.addActionListener(this);
 		panelNewGame_Home.add(chckbxMedium);
 		
 		chckbxHard = new JCheckBox("Hard");
-		chckbxHard.setBackground(Color.RED);
+		chckbxHard.setBackground(plFourColor);
 		chckbxHard.setFont(new Font("courier", Font.PLAIN, 20));
 		chckbxHard.setBounds(494, 140, 115, 35);
 		chckbxHard.addActionListener(this);
@@ -211,6 +194,7 @@ class MainMenu extends JFrame implements ActionListener
 		chckbxHints.setSelected(true);
 		chckbxHints.setFont(new Font("courier", Font.PLAIN, 25));
 		chckbxHints.setBounds(240, 90, 220, 45);
+		chckbxHints.addActionListener(this);
 		panelSettings_Home.add(chckbxHints);
 		
 		comboBoxTheme = new JComboBox(themes);
@@ -253,12 +237,48 @@ class MainMenu extends JFrame implements ActionListener
 		panelTop_Home.setBackground(plOneColor);
 		btnNewGame_Home.setBackground(plTwoColor);
 		btnResume_Home.setBackground(plThreeColor);
-		btnSettings_Home.setBackground(plFourColor);	
+		btnSettings_Home.setBackground(plFourColor);
+		chckbxEasy.setBackground(plTwoColor);
+		chckbxMedium.setBackground(plThreeColor);
+		chckbxHard.setBackground(plFourColor);
+			
 	}
-	
+	public static Color getPlayerColor(int player)
+	{
+		if (player == 0)
+		{
+				return plOneColor;
+		}
+		else if (player == 1)
+		{
+			return plTwoColor;
+		}
+		else if (player == 2)
+		{
+			return plThreeColor;
+		}
+		else if  (player == 3)
+		{
+			return plFourColor;
+		}
+		else {
+			return Color.WHITE;
+		}
+		
+		
+	}
 	
 	public void actionPerformed(ActionEvent e) 
     {
+		if (chckbxHints.isSelected() == false) { hints = false; }
+
+		if (e.getSource().equals(btnResume_Home)) 
+        {
+			setVisible(false);
+			Game gridWindow = new Game(0, hints, difficulty);
+        }
+	
+		
         if (e.getSource().equals(btnNewGame_Home)) 
         {
         	panelNewGame_Home.setVisible(true);
@@ -285,22 +305,26 @@ class MainMenu extends JFrame implements ActionListener
         		Object ob2 = comboBoxCPUplayer.getSelectedItem();
         		intHuman = Integer.valueOf((String) ob1);
         		intCPU = Integer.valueOf((String) ob2);
+        		
+        		
         		if (intHuman + intCPU >= 2 && intHuman + intCPU <= 4) 
         		{
-        			//added
         			if (chckbxEasy.isSelected() ) {
+        				difficulty = 1; 
         				setVisible(false);
-        				Game gridWindow = new Game(0);
         			}
         			else if (chckbxMedium.isSelected()) {
+        				difficulty = 2;
         				setVisible(false);
-                    	Game gridWindow = new Game(30);
         			}
-        			
+
         			else if (chckbxHard.isSelected()) {
+        				difficulty = 3;
         				setVisible(false);
-                    	Game gridWindow = new Game(15);
         			}
+        			Game gridWindow = new Game(1, hints, difficulty);
+        		 }else {
+        			JOptionPane.showMessageDialog(this, "Players cannot be more than 4");
         		}
 			}
 		}
@@ -334,6 +358,24 @@ class MainMenu extends JFrame implements ActionListener
         		updateColors();
         		
         	}	
+        	else if (selectedTheme == "Earth")
+        	{
+        		plOneColor = new Color(255, 111, 0);
+        		plTwoColor = new Color(140, 98, 34);
+        		plThreeColor = new Color(55, 255, 0);
+        		plFourColor = new Color(100, 100, 100);
+        		updateColors();
+        		
+        	}
+        	else if (selectedTheme == "Rainbow")
+        	{
+        		plOneColor = new Color(255, 0, 0);
+        		plTwoColor = new Color(47, 255, 0);
+        		plThreeColor = new Color(0, 200, 255);
+        		plFourColor = new Color(171, 0, 157);
+        		updateColors();
+        		
+        	}
         }
     }
 }
