@@ -1,0 +1,8 @@
+I confirm that I have participated in Iteration 3.  - Albari Islam
+
+* Placed all the imported pieces in a proper way
+* Pieces will be removed after using
+* Message dialog box will pop up if invalid piece is selected
+* Helped other members to debug their code
+* Merged others code into the master
+* Helped other member to fix his system (computer)!
