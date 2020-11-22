@@ -1,5 +1,0 @@
-I confirm that I have participated in Iteration 3.  - Meng Wang
-
-* Make the pieces class
-* Place the piece on the board
-* Use case idea and improvement

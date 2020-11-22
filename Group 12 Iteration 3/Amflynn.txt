@@ -1,8 +1,0 @@
-I confirm that I have participated in Iteration 3.  - Max Flynn
-
-
-11-4 started planning for logical achetecture diagram
-11-5 Edited old and new use case discriptions for grammer, formatting and some content
-11-5 created digitized version of the updated sequence diagrams
-11-6 started work on logical achetecture diagram and new sequence diagrams
-11-7 finished logical achetecture diagram and sequence diagrams  
